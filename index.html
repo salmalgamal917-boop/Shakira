@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كرة القدم</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .header {
+            margin: 40px 0 20px;
+            text-align: center;
+        }
+
+        .fade-in-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #38bdf8;
+            text-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .gallery-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            animation: scrollRightToLeft 45s linear infinite;
+        }
+
+        .gallery-track:hover {
+            animation-play-state: paused;
+        }
+
+        .gallery-img {
+            width: 280px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 25px rgba(56, 189, 248, 0.4);
+            cursor: pointer;
+        }
+
+        @keyframes scrollRightToLeft {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .fade-in-title {
+                font-size: 2.5rem;
+            }
+
+            .gallery-img {
+                width: 200px;
+                height: 150px;
+                border-radius: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .fade-in-title {
+                font-size: 2rem;
+            }
+
+            .gallery-img {
+                width: 160px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1 class="fade-in-title">كرة القدم</h1>
+    </header>
+
+    <main class="gallery-container">
+        <div class="gallery-track" id="galleryTrack"></div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryTrack = document.getElementById('galleryTrack');
+            const totalImages = 20;
+
+            const createImages = () => {
+                for (let i = 1; i <= totalImages; i++) {
+                    const img = document.createElement('img');
+                    img.src = `Images/img${i}.jpg`;
+                    img.alt = `كرة القدم ${i}`;
+                    img.classList.add('gallery-img');
+                    galleryTrack.appendChild(img);
+                }
+            };
+
+            createImages();
+
+            const originalContent = galleryTrack.innerHTML;
+            galleryTrack.innerHTML += originalContent;
+        });
+    </script>
+<audio id="bgMusic" autoplay loop>
+    <source src="Song.mp3" type="audio/mpeg">
+</audio>
+</body>
+</html>
